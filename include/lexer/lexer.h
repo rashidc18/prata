@@ -11,7 +11,7 @@
 #ifndef PRATA_LEXER_H
 #define PRATA_LEXER_H
 
-#include "token.h"
+#include "lexer/token.h"
 
 struct Lexer {
   char* source;

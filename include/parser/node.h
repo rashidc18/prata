@@ -11,7 +11,7 @@
 #ifndef PRATA_NODE_H
 #define PRATA_NODE_H
 
-#include "token.h"
+#include "lexer/token.h"
 
 enum Node_Type {
   PRATA_NODE_INT,

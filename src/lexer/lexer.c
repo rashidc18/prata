@@ -12,10 +12,10 @@
 #include <stdlib.h>
 
 #include "error.h"
-#include "file.h"
-#include "lexer.h"
+#include "utils/file.h"
+#include "lexer/lexer.h"
 #include "position.h"
-#include "token.h"
+#include "lexer/token.h"
 
 
 struct Lexer*

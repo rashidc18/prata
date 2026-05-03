@@ -11,7 +11,7 @@
 #ifndef PRATA_PARSER_H
 #define PRATA_PARSER_H
 
-#include "lexer.h"
+#include "lexer/lexer.h"
 
 struct Parser {
   struct Lexer* lexer;

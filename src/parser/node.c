@@ -12,8 +12,8 @@
 #include <stdlib.h>
 
 #include "error.h"
-#include "node.h"
-#include "token.h"
+#include "parser/node.h"
+#include "lexer/token.h"
 
 #define NODE_NEW(var, function, typ)                     \
   do {                                                   \
@@ -26,10 +26,10 @@
   } while (0)
 
 struct Node*
-int_node_new(int value)
+int_literal_node_new(int value)
 {
   struct Node* n;
-  NODE_NEW(n, "int_node_new", NT_INT);
+  NODE_NEW(n, "int_literal_node_new", PRATA_NODE_INT);
 
   n->data.int_literal.value = value;
 
@@ -40,7 +40,7 @@ struct Node*
 binary_op_node_new(enum Token_Type op, struct Node* left, struct Node* right)
 {
   struct Node* n;
-  NODE_NEW(n, "binary_op_node_new", NT_BINARY_OP);
+  NODE_NEW(n, "binary_op_node_new", PRATA_NODE_BINARY_OP);
 
   n->data.binary_op.op = op;
   n->data.binary_op.left = left;
@@ -56,11 +56,11 @@ node_free(struct Node* n)
     return;
 
   switch (n->type) {
-    case NT_INT:
+    case PRATA_NODE_INT:
       free(n);
       break;
 
-    case NT_BINARY_OP:
+    case PRATA_NODE_BINARY_OP:
       node_free(n->data.binary_op.left);
       node_free(n->data.binary_op.right);
       break;

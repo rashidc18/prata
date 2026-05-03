@@ -5,7 +5,7 @@ CC = clang  # switch to GCC when compiling for distribution
 CFLAGS = -I$(INCLUDE_DIR) -ansi -Wall -Wextra -Wpedantic -Werror -O3
 
 TARGET = prata
-SRC = $(wildcard $(SRC_DIR)/*.c)
+SRC = $(wildcard $(SRC_DIR)/*.c $(SRC_DIR)/*/*.c)
 OBJ = $(SRC:.c=.o)
 
 all: $(TARGET)

@@ -10,7 +10,7 @@
 
 #include <stdio.h>
 
-#include "token.h"
+#include "lexer/token.h"
 
 /*
  * if you change the order, please update it in enum Token_Type as well

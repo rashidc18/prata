@@ -43,8 +43,8 @@
 
 #include "prata.h"
 
-#include "lexer.h"
-#include "parser.h"
+#include "lexer/lexer.h"
+#include "parser/parser.h"
 
 void
 usage(void)

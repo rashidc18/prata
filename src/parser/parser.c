@@ -24,9 +24,9 @@
 #include <stdlib.h>
 
 #include "error.h"
-#include "lexer.h"
-#include "parser.h"
-#include "token.h"
+#include "lexer/lexer.h"
+#include "parser/parser.h"
+#include "lexer/token.h"
 
 struct Parser*
 parser_new(const char* fpath) {
