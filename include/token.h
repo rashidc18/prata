@@ -15,15 +15,15 @@
  * if you change the order, please update it in token_type_string as well.
  */
 enum Token_Type {
-  TT_EOF,
-  TT_ILLEGAL,
-  TT_INT,
-  TT_PLUS,
-  TT_MINUS,
-  TT_ASTERISK,
-  TT_SLASH,
-  TT_LPAREN,
-  TT_RPAREN
+  PRATA_TOKEN_EOF,
+  PRATA_TOKEN_ILLEGAL,
+  PRATA_TOKEN_INT,
+  PRATA_TOKEN_PLUS,
+  PRATA_TOKEN_MINUS,
+  PRATA_TOKEN_ASTERISK,
+  PRATA_TOKEN_SLASH,
+  PRATA_TOKEN_LPAREN,
+  PRATA_TOKEN_RPAREN
 };
 
 extern const char* token_type_string[];

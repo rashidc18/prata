@@ -74,7 +74,7 @@ lexer_get(struct Lexer* l)
   token.length = 0;
 
   if (isdigit(l->curr_char)) {
-    token.type = TT_INT;
+    token.type = PRATA_TOKEN_INT;
 
     while (isdigit(l->curr_char)) {
       token.length++;
@@ -88,35 +88,35 @@ lexer_get(struct Lexer* l)
     token.length = 1;
     switch (l->curr_char) {
       case '\0':
-        token.type = TT_EOF;
+        token.type = PRATA_TOKEN_EOF;
         break;
    
       case '+':
-        token.type = TT_PLUS;
+        token.type = PRATA_TOKEN_PLUS;
         break;
     
       case '-':
-        token.type = TT_MINUS;
+        token.type = PRATA_TOKEN_MINUS;
         break;
 
       case '*':
-        token.type = TT_ASTERISK;
+        token.type = PRATA_TOKEN_ASTERISK;
         break;
 
       case '/':
-        token.type = TT_SLASH;
+        token.type = PRATA_TOKEN_SLASH;
         break;
 
       case '(':
-        token.type = TT_LPAREN;
+        token.type = PRATA_TOKEN_LPAREN;
         break;
 
       case ')':
-        token.type = TT_RPAREN;
+        token.type = PRATA_TOKEN_RPAREN;
         break;
 
       default:
-        token.type = TT_ILLEGAL;
+        token.type = PRATA_TOKEN_ILLEGAL;
         fprintf(stderr, "error: illegal %c\n", l->curr_char);
         break;
     }
