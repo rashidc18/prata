@@ -38,8 +38,10 @@
  */
 
 #include <stdio.h>
+#include <stdlib.h>
 #include <string.h>
 
+#include "file.h"
 #include "prata.h"
 
 void
@@ -70,6 +72,8 @@ int
 main(int argc, char* argv[])
 {
   const char* fpath;
+  char* source;
+  long size;
 
   if (argc == 1) {
     usage();
@@ -81,7 +85,14 @@ main(int argc, char* argv[])
   if (!fpath)
     return (1);
 
-  printf("file: %s\n", fpath);
+  source = read_text_file(fpath, &size);
+
+  if (!source)
+    return (1);
+
+  printf("FILE: %s, SIZE: %ld\n%s", fpath, size, source);
+
+  free(source);
 
   return (0);
 }
