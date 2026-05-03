@@ -41,8 +41,9 @@
 #include <stdlib.h>
 #include <string.h>
 
-#include "file.h"
 #include "prata.h"
+
+#include "lexer.h"
 
 void
 usage(void)
@@ -72,8 +73,8 @@ int
 main(int argc, char* argv[])
 {
   const char* fpath;
-  char* source;
-  long size;
+  struct Lexer* l;
+  struct Token t;
 
   if (argc == 1) {
     usage();
@@ -85,14 +86,17 @@ main(int argc, char* argv[])
   if (!fpath)
     return (1);
 
-  source = read_text_file(fpath, &size);
-
-  if (!source)
+  l = lexer_new(fpath);
+  
+  if (!l)
     return (1);
 
-  printf("FILE: %s, SIZE: %ld\n%s", fpath, size, source);
+  while (l->curr_char != '\0') {
+    t = lexer_get(l);
+    print_token(t);
+  }
 
-  free(source);
+  lexer_free(l);
 
   return (0);
 }
