@@ -13,8 +13,14 @@
 
 #include <stdio.h>
 
+#include "position.h"
+
 #define MALLOC_ERROR(function) \
   fprintf(stderr, "malloc failed: %s.\n", function)
+
+void error(struct Position, const char*, ...);
+void illegal_character_error(struct Position, char);
+void unexpected_error(struct Position, char*, int);
 
 #endif
 

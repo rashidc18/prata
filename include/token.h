@@ -11,6 +11,8 @@
 #ifndef PRATA_TOKEN_H
 #define PRATA_TOKEN_H
 
+#include "position.h"
+
 /*
  * if you change the order, please update it in token_type_string as well.
  */
@@ -29,10 +31,10 @@ enum Token_Type {
 extern const char* token_type_string[];
 
 struct Token {
-  const char* fpath;
+  struct Position position;
   enum Token_Type type;
   char* literal;
-  int length, line, column;
+  int length;
 };
 
 void print_token(struct Token);

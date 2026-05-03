@@ -44,6 +44,7 @@
 #include "prata.h"
 
 #include "lexer.h"
+#include "parser.h"
 
 void
 usage(void)
@@ -73,8 +74,7 @@ int
 main(int argc, char* argv[])
 {
   const char* fpath;
-  struct Lexer* l;
-  struct Token t;
+  struct Parser* parser;
 
   if (argc == 1) {
     usage();
@@ -86,17 +86,14 @@ main(int argc, char* argv[])
   if (!fpath)
     return (1);
 
-  l = lexer_new(fpath);
-  
-  if (!l)
+  parser = parser_new(fpath);
+
+  if (!parser)
     return (1);
 
-  while (l->curr_char != '\0') {
-    t = lexer_get(l);
-    print_token(t);
-  }
+  parser_statement(parser);
 
-  lexer_free(l);
+  parser_free(parser);
 
   return (0);
 }

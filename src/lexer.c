@@ -14,6 +14,7 @@
 #include "error.h"
 #include "file.h"
 #include "lexer.h"
+#include "position.h"
 #include "token.h"
 
 
@@ -67,9 +68,10 @@ lexer_get(struct Lexer* l)
   struct Token token;
   lexer_skip(l);
 
-  token.fpath = l->fpath;
-  token.line = l->line;
-  token.column = l->column;
+  token.position.fpath = l->fpath;
+  token.position.line = l->line;
+  token.position.column = l->column;
+
   token.literal = &l->source[l->position];
   token.length = 0;
 
@@ -117,7 +119,7 @@ lexer_get(struct Lexer* l)
 
       default:
         token.type = PRATA_TOKEN_ILLEGAL;
-        fprintf(stderr, "error: illegal %c\n", l->curr_char);
+        illegal_character_error(token.position, l->curr_char);
         break;
     }
 

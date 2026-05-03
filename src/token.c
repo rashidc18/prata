@@ -31,7 +31,7 @@ void
 print_token(struct Token t)
 {
   puts("[Token]");
-  printf("\tPosition => %s:%d:%d\n", t.fpath, t.line, t.column);
+  printf("\tPosition => %s:%d:%d\n", t.position.fpath, t.position.line, t.position.column);
   printf("\tType     => %s\n", token_type_string[t.type]);
   printf("\tLiteral  => %.*s\n", t.length, t.literal);
 }
