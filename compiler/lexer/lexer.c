@@ -12,7 +12,7 @@
 #include <stdlib.h>
 
 #include "error.h"
-#include "utils/file.h"
+#include "file.h"
 #include "lexer/lexer.h"
 #include "position.h"
 #include "lexer/token.h"
