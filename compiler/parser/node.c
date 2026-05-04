@@ -50,6 +50,15 @@ binary_op_node_new(struct Position p, enum Token_Type op, struct Node* left, str
   return (n);
 }
 
+struct Node*
+eof_node_new(struct Position p)
+{
+  struct Node* n;
+  NODE_NEW(n, "eof_node_new", PRATA_NODE_EOF, p);
+
+  return (n);
+}
+
 void
 node_free(struct Node* n)
 {
@@ -58,6 +67,7 @@ node_free(struct Node* n)
 
   switch (n->type) {
     case PRATA_NODE_INT:
+    case PRATA_NODE_EOF:
       break;
 
     case PRATA_NODE_BINARY_OP:

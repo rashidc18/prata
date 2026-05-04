@@ -43,15 +43,12 @@
 
 #include "prata.h"
 
-#include "lexer/lexer.h"
-#include "lexer/token.h"
-#include "parser/node.h"
-#include "parser/parser.h"
+#include "codegen.h"
 
 void
 usage(void)
 {
-  puts("Usage: ./prata [options] <file>");
+  puts("Usage: ./pratac [options] <file>");
   puts("Options:");
   puts("  --help      Print this message.");
   puts("  --version   Print version.");
@@ -76,8 +73,7 @@ int
 main(int argc, char* argv[])
 {
   const char* fpath;
-  struct Parser* parser;
-  struct Node* node;
+  int err;
 
   if (argc == 1) {
     usage();
@@ -89,26 +85,8 @@ main(int argc, char* argv[])
   if (!fpath)
     return (1);
 
-  parser = parser_new(fpath);
+  err = generate(fpath, "a.out");
 
-  if (!parser)
-    return (1);
-
-  node = parser_statement(parser);
-
-  if (!node)
-    goto end;
-
-  printf("%s %d %d\n",
-      token_type_string[node->data.binary_op.op],
-      node->data.binary_op.left->data.int_literal.value,
-      node->data.binary_op.right->data.int_literal.value
-  );
-  node_free(node);
-
-  end:
-    parser_free(parser);
-
-  return (0);
+  return (err);
 }
 

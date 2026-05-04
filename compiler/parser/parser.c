@@ -85,7 +85,12 @@ parser_match(struct Parser* p, enum Token_Type expected)
 struct Node*
 parser_statement(struct Parser* p)
 {
-  return parser_expr(p);
+  if (p->current.type == PRATA_TOKEN_EOF) {
+    return eof_node_new(p->current.position);
+  }
+  else {
+    return parser_expr(p);
+  }
 }
 
 struct Node*

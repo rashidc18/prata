@@ -15,6 +15,7 @@
 #include "position.h"
 
 enum Node_Type {
+  PRATA_NODE_EOF,
   PRATA_NODE_INT,
   PRATA_NODE_BINARY_OP
 };
@@ -38,6 +39,7 @@ struct Node {
 
 struct Node* int_literal_node_new(struct Position, int);
 struct Node* binary_op_node_new(struct Position, enum Token_Type, struct Node*, struct Node*);
+struct Node* eof_node_new(struct Position);
 
 void node_free(struct Node*);
 
