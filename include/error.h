@@ -13,6 +13,7 @@
 
 #include <stdio.h>
 
+#include "lexer/token.h"
 #include "position.h"
 
 #define MALLOC_ERROR(function) \
@@ -20,7 +21,8 @@
 
 void error(struct Position, const char*, ...);
 void illegal_character_error(struct Position, char);
-void unexpected_error(struct Position, char*, int);
+void unexpected_error(struct Token);
+void expected_error(struct Token, enum Token_Type);
 
 #endif
 

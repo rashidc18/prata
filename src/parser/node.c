@@ -15,7 +15,7 @@
 #include "parser/node.h"
 #include "lexer/token.h"
 
-#define NODE_NEW(var, function, typ)                     \
+#define NODE_NEW(var, function, typ, pos)                \
   do {                                                   \
     var = malloc(sizeof(struct Node));                   \
     if (!var) {                                          \
@@ -23,13 +23,14 @@
       return NULL;                                       \
     }                                                    \
     var->type = typ;                                     \
+    var->position = pos;                                 \
   } while (0)
 
 struct Node*
-int_literal_node_new(int value)
+int_literal_node_new(struct Position p, int value)
 {
   struct Node* n;
-  NODE_NEW(n, "int_literal_node_new", PRATA_NODE_INT);
+  NODE_NEW(n, "int_literal_node_new", PRATA_NODE_INT, p);
 
   n->data.int_literal.value = value;
 
@@ -37,10 +38,10 @@ int_literal_node_new(int value)
 }
 
 struct Node*
-binary_op_node_new(enum Token_Type op, struct Node* left, struct Node* right)
+binary_op_node_new(struct Position p, enum Token_Type op, struct Node* left, struct Node* right)
 {
   struct Node* n;
-  NODE_NEW(n, "binary_op_node_new", PRATA_NODE_BINARY_OP);
+  NODE_NEW(n, "binary_op_node_new", PRATA_NODE_BINARY_OP, p);
 
   n->data.binary_op.op = op;
   n->data.binary_op.left = left;
@@ -57,7 +58,6 @@ node_free(struct Node* n)
 
   switch (n->type) {
     case PRATA_NODE_INT:
-      free(n);
       break;
 
     case PRATA_NODE_BINARY_OP:
@@ -69,7 +69,6 @@ node_free(struct Node* n)
       /* not implemented */
       break;
   }
-
   free(n);
 }
 

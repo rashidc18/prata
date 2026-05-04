@@ -44,6 +44,8 @@
 #include "prata.h"
 
 #include "lexer/lexer.h"
+#include "lexer/token.h"
+#include "parser/node.h"
 #include "parser/parser.h"
 
 void
@@ -75,6 +77,7 @@ main(int argc, char* argv[])
 {
   const char* fpath;
   struct Parser* parser;
+  struct Node* node;
 
   if (argc == 1) {
     usage();
@@ -91,9 +94,20 @@ main(int argc, char* argv[])
   if (!parser)
     return (1);
 
-  parser_statement(parser);
+  node = parser_statement(parser);
 
-  parser_free(parser);
+  if (!node)
+    goto end;
+
+  printf("%s %d %d\n",
+      token_type_string[node->data.binary_op.op],
+      node->data.binary_op.left->data.int_literal.value,
+      node->data.binary_op.right->data.int_literal.value
+  );
+  node_free(node);
+
+  end:
+    parser_free(parser);
 
   return (0);
 }

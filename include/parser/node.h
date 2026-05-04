@@ -12,6 +12,7 @@
 #define PRATA_NODE_H
 
 #include "lexer/token.h"
+#include "position.h"
 
 enum Node_Type {
   PRATA_NODE_INT,
@@ -20,6 +21,7 @@ enum Node_Type {
 
 struct Node {
   enum Node_Type type;
+  struct Position position;
 
   union {
     struct {
@@ -34,8 +36,8 @@ struct Node {
   } data;
 };
 
-struct Node* int_node_new(int);
-struct Node* binary_op_node_new(enum Token_Type, struct Node*, struct Node*);
+struct Node* int_literal_node_new(struct Position, int);
+struct Node* binary_op_node_new(struct Position, enum Token_Type, struct Node*, struct Node*);
 
 void node_free(struct Node*);
 

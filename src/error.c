@@ -12,6 +12,7 @@
 #include <stdio.h>
 
 #include "error.h"
+#include "lexer/token.h"
 #include "position.h"
 
 void
@@ -20,7 +21,7 @@ error(struct Position p, const char* fmt, ...)
   va_list args;
   va_start(args, fmt);
 
-  fprintf(stderr, "Error at %s:%d:%d, ", p.fpath, p.line, p.column);
+  fprintf(stderr, "error at %s:%d:%d: ", p.fpath, p.line, p.column);
   vfprintf(stderr, fmt, args);
   fprintf(stderr, ".\n");
 
@@ -34,8 +35,20 @@ illegal_character_error(struct Position p, char c)
 }
 
 void
-unexpected_error(struct Position p, char* token, int length)
+unexpected_error(struct Token token)
 {
-  error(p, "unexpected %.*s", length, token);
+  error(token.position, "unexpected '%.*s'", token.length, token.literal);
+}
+
+void
+expected_error(struct Token token, enum Token_Type expected)
+{
+  error(
+    token.position,
+    "expected %s but got '%.*s'",
+    token_type_string[expected],
+    token.length,
+    token.literal
+  );
 }
 

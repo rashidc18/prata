@@ -17,8 +17,8 @@
  */
 const char* token_type_string[] = {
   "<EOF>",
-  "<ILLEGAL>",
-  "<INT>",
+  "[ILLEGAL]",
+  "<int>",
   "+",
   "-",
   "*",
